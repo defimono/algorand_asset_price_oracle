@@ -1,7 +1,16 @@
 import json
 
+from dotenv import load_dotenv
+
+from modules.config.load_config import load_config
+from modules.config.logger import logger
+
+load_dotenv()
+
 
 def main(event, context):
+    config = load_config()
+
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
@@ -16,4 +25,4 @@ def main(event, context):
 
 
 if __name__ == "__main__":
-    main(None, None)
+    logger.info(main(None, None))

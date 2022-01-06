@@ -10,11 +10,8 @@ provider:
   lambdaHashingVersion: 20201221
   stage: dev
   region: eu-west-1
-
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  environment:
+    ALGO_CHAIN: test
 
 functions:
   main:
