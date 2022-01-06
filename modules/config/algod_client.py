@@ -1,6 +1,6 @@
 from algosdk.v2client import algod
 
-from config.logger import logger
+from modules.config.logger import logger
 
 
 def initialize_algod_client(address, token):
