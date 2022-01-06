@@ -1,5 +1,6 @@
 from algosdk.v2client import algod
 
+from modules.config.load_config import load_config
 from modules.config.logger import logger
 
 
@@ -10,4 +11,6 @@ def initialize_algod_client(address, token):
         "X-API-Key": token,
     }
 
-    return algod.AlgodClient(token, address, headers)
+    algod_client = algod.AlgodClient(token, address, headers)
+
+    return algod_client

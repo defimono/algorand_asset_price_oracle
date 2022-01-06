@@ -8,7 +8,7 @@ def load_config():
         "admin_private_key": os.environ['ADMIN_PRIVATE_KEY'],
         "admin_mnemonic": os.environ['ADMIN_MNEMONIC'],
         "algod_address": os.environ['ALGOD_ADDRESS'],
-        "algod_key": os.environ['ALGOD_KEY'],
+        "algod_token": os.environ['ALGOD_KEY'],
         "algod_chain": os.environ['ALGOD_CHAIN'],
     }
 
