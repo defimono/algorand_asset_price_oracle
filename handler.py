@@ -5,6 +5,7 @@ from algosdk.future import transaction
 from algosdk.future.transaction import wait_for_confirmation
 from dotenv import load_dotenv
 
+from modules.config.algod_client import initialize_algod_client
 from modules.config.load_config import load_config
 from modules.config.logger import logger
 import requests
@@ -24,22 +25,19 @@ def get_updated_price():
     return float(real_price)
 
 
-def call_noop(algod_client, app_id, private_key):
+def call_noop(algod_client, app_id, private_key, app_args):
     """
     Call the update function in the deployed application with the new application TEAL
+    :param app_args:
     :param algod_client: preconfigured algo client
     :param app_id: application id to update
     :param private_key: private key to authenticate and approve ourselves follwing the teal logic
-    :param approval_teal: approval teal to replace the deployed teal with
-    :param clear_teal: clear teal to replace the deployed clear teal with
     :return: raw transaction response of the update function
     """
     sender = account.address_from_private_key(private_key)
 
     # get node suggested parameters
     params = algod_client.suggested_params()
-
-    app_args = ["update_price", price]
 
     # create unsigned transaction
     txn = transaction.ApplicationNoOpTxn(sender, params, app_id, app_args)
@@ -56,7 +54,17 @@ def call_noop(algod_client, app_id, private_key):
 
 
 def main(event, context):
-    config = load_config()
+    app_config = load_config()
+
+    algo_api_address = app_config.get("algod_address")
+
+    algo_api_token = app_config.get("algod_token")
+
+    oracle_app_id = app_config.get("oracle_app_id")
+
+    admin_private_key = app_config.get("admin_private_key")
+
+    algod_client = initialize_algod_client(algo_api_address, algo_api_token)
 
     # get new price
     real_price = get_updated_price()
@@ -65,7 +73,9 @@ def main(event, context):
     price_fixed_point = int(real_price * 10 ** 2)
 
     # call noop with new price and sign with service account
-    
+    app_args = ["update_price", price_fixed_point]
+
+    call_noop(algod_client, oracle_app_id, admin_private_key, app_args)
 
     response = {
         "statusCode": 200,
