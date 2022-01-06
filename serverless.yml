@@ -1,0 +1,31 @@
+service: algo-price-oracle
+#app: your-app-name
+#org: your-org-name
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: eu-west-1
+
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+functions:
+  main:
+    handler: handler.main
+#    events:
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
