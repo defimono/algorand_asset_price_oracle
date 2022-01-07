@@ -14,6 +14,10 @@ load_dotenv()
 
 
 def get_updated_price():
+    """
+    Query public API for ALGO price information. Will query, parse, and return a float representation pegged to USD.
+    :return: float representation of price
+    """
     url = "https://api.coinbase.com/v2/prices/ALGO-USD/buy"
 
     raw_response = requests.get(url)
@@ -32,8 +36,8 @@ def get_updated_price():
 def call_noop(client, app_id, private_key, app_args):
     """
     Call the update function in the deployed application with the new application TEAL
-    :param client:
-    :param app_args:
+    :param client: preconfigured algod client for desired chain (main, test, or beta)
+    :param app_args: app args to pass to teal function inside smart contract on chain
     :param app_id: application id to update
     :param private_key: private key to authenticate and approve ourselves following the teal logic
     :return: raw transaction response of the update function
@@ -58,40 +62,56 @@ def call_noop(client, app_id, private_key, app_args):
     wait_for_confirmation(client, tx_id, 10)
 
 
-def main(event, context):
-    app_config = load_config()
+def main():
+    try:
+        app_config = load_config()
 
-    algod_address = app_config.get("algod_address")
+        algod_address = app_config.get("algod_address")
 
-    algod_token = app_config.get("algod_token")
+        algod_token = app_config.get("algod_token")
 
-    algod_client = initialize_algod_client(algod_address, algod_token)
+        algod_client = initialize_algod_client(algod_address, algod_token)
 
-    oracle_app_id = app_config.get("oracle_app_id")
+        oracle_app_id = app_config.get("oracle_app_id")
 
-    admin_private_key = app_config.get("admin_private_key")
+        admin_private_key = app_config.get("admin_private_key")
 
-    # get new price
-    real_price = get_updated_price()
+        # get new price
+        real_price = get_updated_price()
 
-    # Real price is to fixed point to get round the issues with float in teal
-    price_fixed_point = int(real_price * 10 ** 2)
+        # Real price is to fixed point to get round the issues with float in teal
+        price_fixed_point = int(real_price * 10 ** 2)
 
-    logger.info("Setting 2 digit fixed point price to: {} ".format(price_fixed_point))
+        logger.info("Setting 2 digit fixed point price to: {} ".format(price_fixed_point))
 
-    # call noop with new price and sign with service account
-    # 2 meas we want two digits in the fixed point precision of the price
-    app_args = ["update_price", price_fixed_point, 2]
+        # call noop with new price and sign with service account
+        # 2 meas we want two digits in the fixed point precision of the price
+        app_args = ["update_price", price_fixed_point, 2]
 
-    call_noop(algod_client, oracle_app_id, admin_private_key, app_args)
+        # Call the update operation in the published stateful algorand smart contract
+        call_noop(algod_client, oracle_app_id, admin_private_key, app_args)
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(price_fixed_point)
-    }
+        logger.info("Application update called successfully")
 
-    return response
+        # If called via API Gateway, return a formatted response body as needed.
+        response = {
+            "statusCode": 200,
+            "body": json.dumps(price_fixed_point)
+        }
+
+        return response
+
+    except Exception as error:
+        response = {
+            "statusCode": 500,
+            "body": json.dumps(error)
+        }
+
+        return response
 
 
 if __name__ == "__main__":
-    logger.info(main(None, None))
+    """
+    Local development helper.
+    """
+    logger.info(main())
