@@ -1,16 +1,38 @@
-service: algo_price_oracle
+service: algo-price-oracle
 
 frameworkVersion: '2'
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  environment:
+    ALGO_CHAIN:
+      production: "main"
+      development: "test"
+    ORACLE_APP_ID:
+      production: "main"
+      development: "1234556"
+    ADMIN_WALLET_ADDRESS:
+      production: "main"
+      development: "test"
+    ADMIN_PRIVATE_KEY:
+      production: "main"
+      development: "1234556"
+    ALGOD_ADDRESS:
+      production: "main"
+      development: "1234556"
 
 provider:
   name: aws
   runtime: python3.8
   lambdaHashingVersion: 20201221
-  stage: dev
+  stage: development
   region: eu-west-1
   environment:
-    ALGO_CHAIN: test
-    ORACLE_APP_ID: ${ssm:/darksky-api-key~true}
+    ALGO_CHAIN: ${self:custom.environment.ALGO_CHAIN.${self:custom.stage}}
+    ORACLE_APP_ID: ${self:custom.environment.ORACLE_APP_ID.${self:custom.stage}}
+    ADMIN_WALLET_ADDRESS: ${self:custom.environment.ADMIN_WALLET_ADDRESS.${self:custom.stage}}
+    ADMIN_PRIVATE_KEY: ${self:custom.environment.ADMIN_PRIVATE_KEY.${self:custom.stage}}
+    ALGOD_ADDRESS: ${self:custom.environment.ALGOD_ADDRESS.${self:custom.stage}}
 
 functions:
   main:
