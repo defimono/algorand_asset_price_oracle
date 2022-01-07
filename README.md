@@ -32,6 +32,10 @@ It is secure as I am able to make it during the MVP phase of the project. It has
 
 This is an alpha, and not live on the mainnet until third party auditing and compliance can be obtained.
 
+### How does it run?
+
+Currently, it is deployed via serverless to AWS and set with a cron trigger every 5 minutes to execute. The development version is live on the testnet and the mainnet version will be coming once testing is complete. It is set to run every 5 minutes since every transaction has a gas fee of .001 algos. We do not have funding yet to be able to increase frequency, but it is desired in future iterations.
+
 ## Roadmap
 
 Currently, in no particular order, we need to implement the following.
