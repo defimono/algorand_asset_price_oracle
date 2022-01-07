@@ -1,6 +1,5 @@
 from algosdk.v2client import algod
 
-from modules.config.load_config import load_config
 from modules.config.logger import logger
 
 

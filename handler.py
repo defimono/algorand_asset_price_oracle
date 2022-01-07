@@ -3,7 +3,6 @@ import json
 from algosdk import account
 from algosdk.future import transaction
 from algosdk.future.transaction import wait_for_confirmation
-from algosdk.v2client import algod
 from dotenv import load_dotenv
 
 from modules.config.algod_client import initialize_algod_client
@@ -81,12 +80,10 @@ def main(event, context):
     logger.info("Setting 2 digit fixed point price to: {} ".format(price_fixed_point))
 
     # call noop with new price and sign with service account
-    app_args = ["update_price", price_fixed_point]
+    # 2 meas we want two digits in the fixed point precision of the price
+    app_args = ["update_price", price_fixed_point, 2]
 
-    # call_noop(algod_client, oracle_app_id, admin_private_key, app_args)
-
-    # get node suggested parameters
-    params = algod_client.suggested_params()
+    call_noop(algod_client, oracle_app_id, admin_private_key, app_args)
 
     response = {
         "statusCode": 200,
