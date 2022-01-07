@@ -11,15 +11,10 @@ custom:
     ORACLE_APP_ID:
       production: "main"
       development: "57082823"
-    ADMIN_WALLET_ADDRESS:
-      production: ""
-      development: "test"
-    ADMIN_PRIVATE_KEY:
-      production: ""
-      development: ${ssm:/path/to/service/id}
     ALGOD_ADDRESS:
       production: "https://algoexplorerapi.io"
       development: "https://testnet.algoexplorerapi.io"
+
 
 provider:
   name: aws
@@ -30,10 +25,9 @@ provider:
   environment:
     ALGO_CHAIN: ${self:custom.environment.ALGO_CHAIN.${self:custom.stage}}
     ORACLE_APP_ID: ${self:custom.environment.ORACLE_APP_ID.${self:custom.stage}}
-    ADMIN_WALLET_ADDRESS: ${self:custom.environment.ADMIN_WALLET_ADDRESS.${self:custom.stage}}
-    ADMIN_PRIVATE_KEY: ${self:custom.environment.ADMIN_PRIVATE_KEY.${self:custom.stage}}
     ALGOD_ADDRESS: ${self:custom.environment.ALGOD_ADDRESS.${self:custom.stage}}
-
+    SECRET_NAME: ${opt:secret_name}
+    AWS_REGION: ${opt:aws_region}
 functions:
   main:
     handler: handler.main

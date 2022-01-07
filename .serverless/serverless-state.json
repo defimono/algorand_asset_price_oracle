@@ -12,7 +12,10 @@
       "region": "eu-west-1",
       "environment": {
         "ALGO_CHAIN": "test",
-        "ORACLE_APP_ID": "1234556"
+        "ORACLE_APP_ID": "57082823",
+        "ALGOD_ADDRESS": "https://testnet.algoexplorerapi.io",
+        "SECRET_NAME": "arn:aws:secretsmanager:eu-west-1:560723339883:secret:algorand_account_credentials-00SvnV",
+        "AWS_REGION": "eu-west-1"
       },
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -178,7 +181,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/algo-price-oracle/development/1641567289896-2022-01-07T14:54:49.896Z/algo-price-oracle.zip"
+                "S3Key": "serverless/algo-price-oracle/development/1641574979296-2022-01-07T17:02:59.296Z/algo-price-oracle.zip"
               },
               "Handler": "handler.main",
               "Runtime": "python3.8",
@@ -188,7 +191,10 @@
               "Environment": {
                 "Variables": {
                   "ALGO_CHAIN": "test",
-                  "ORACLE_APP_ID": "1234556"
+                  "ORACLE_APP_ID": "57082823",
+                  "ALGOD_ADDRESS": "https://testnet.algoexplorerapi.io",
+                  "SECRET_NAME": "arn:aws:secretsmanager:eu-west-1:560723339883:secret:algorand_account_credentials-00SvnV",
+                  "AWS_REGION": "eu-west-1"
                 }
               },
               "Role": {
@@ -202,14 +208,14 @@
               "MainLogGroup"
             ]
           },
-          "MainLambdaVersionbIVqZnsEj48mb7Y7PSR2qijlDcU8VgRoQVWBnVIrYI": {
+          "MainLambdaVersionv3RsJai7ONcs68YJ6gPzKOYKw0PuwtNEamaaDTGPXw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MainLambdaFunction"
               },
-              "CodeSha256": "gkd7PsUnrFEtdsg4i2Kp2TSQWEF7QK7sWqp/e0wgF/4="
+              "CodeSha256": "4iiaY2mNDloEMVDram7l/lVKHxLOclLvxQDTmJ4EJOg="
             }
           },
           "MainEventsRuleSchedule1": {
@@ -262,7 +268,7 @@
           "MainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MainLambdaVersionbIVqZnsEj48mb7Y7PSR2qijlDcU8VgRoQVWBnVIrYI"
+              "Ref": "MainLambdaVersionv3RsJai7ONcs68YJ6gPzKOYKw0PuwtNEamaaDTGPXw"
             },
             "Export": {
               "Name": "sls-algo-price-oracle-development-MainLambdaFunctionQualifiedArn"
@@ -363,7 +369,11 @@
         },
         "ORACLE_APP_ID": {
           "production": "main",
-          "development": "1234556"
+          "development": "57082823"
+        },
+        "ALGOD_ADDRESS": {
+          "production": "https://algoexplorerapi.io",
+          "development": "https://testnet.algoexplorerapi.io"
         }
       }
     },
@@ -382,7 +392,7 @@
         "timeout": 6,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "MainLambdaVersionbIVqZnsEj48mb7Y7PSR2qijlDcU8VgRoQVWBnVIrYI"
+        "versionLogicalId": "MainLambdaVersionv3RsJai7ONcs68YJ6gPzKOYKw0PuwtNEamaaDTGPXw"
       }
     },
     "configValidationMode": "warn",
@@ -404,10 +414,10 @@
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/Users/dallinwright/projects/defimono/algo_price_oracle/.serverless/algo-price-oracle.zip"
+    "artifact": "/home/dallin/projects/defimono/algo_price_oracle/.serverless/algo-price-oracle.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/algo-price-oracle/development/1641567289896-2022-01-07T14:54:49.896Z",
+    "artifactDirectoryName": "serverless/algo-price-oracle/development/1641574979296-2022-01-07T17:02:59.296Z",
     "artifact": "algo-price-oracle.zip"
   }
 }

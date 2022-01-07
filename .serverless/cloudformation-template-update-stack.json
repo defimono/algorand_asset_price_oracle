@@ -161,7 +161,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/algo-price-oracle/development/1641567289896-2022-01-07T14:54:49.896Z/algo-price-oracle.zip"
+          "S3Key": "serverless/algo-price-oracle/development/1641574979296-2022-01-07T17:02:59.296Z/algo-price-oracle.zip"
         },
         "Handler": "handler.main",
         "Runtime": "python3.8",
@@ -171,7 +171,10 @@
         "Environment": {
           "Variables": {
             "ALGO_CHAIN": "test",
-            "ORACLE_APP_ID": "1234556"
+            "ORACLE_APP_ID": "57082823",
+            "ALGOD_ADDRESS": "https://testnet.algoexplorerapi.io",
+            "SECRET_NAME": "arn:aws:secretsmanager:eu-west-1:560723339883:secret:algorand_account_credentials-00SvnV",
+            "AWS_REGION": "eu-west-1"
           }
         },
         "Role": {
@@ -185,14 +188,14 @@
         "MainLogGroup"
       ]
     },
-    "MainLambdaVersionbIVqZnsEj48mb7Y7PSR2qijlDcU8VgRoQVWBnVIrYI": {
+    "MainLambdaVersionv3RsJai7ONcs68YJ6gPzKOYKw0PuwtNEamaaDTGPXw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "MainLambdaFunction"
         },
-        "CodeSha256": "gkd7PsUnrFEtdsg4i2Kp2TSQWEF7QK7sWqp/e0wgF/4="
+        "CodeSha256": "4iiaY2mNDloEMVDram7l/lVKHxLOclLvxQDTmJ4EJOg="
       }
     },
     "MainEventsRuleSchedule1": {
@@ -245,7 +248,7 @@
     "MainLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "MainLambdaVersionbIVqZnsEj48mb7Y7PSR2qijlDcU8VgRoQVWBnVIrYI"
+        "Ref": "MainLambdaVersionv3RsJai7ONcs68YJ6gPzKOYKw0PuwtNEamaaDTGPXw"
       },
       "Export": {
         "Name": "sls-algo-price-oracle-development-MainLambdaFunctionQualifiedArn"
