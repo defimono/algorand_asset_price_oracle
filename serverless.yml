@@ -1,4 +1,4 @@
-service: algo-price-oracle
+service: algo_price_oracle
 
 frameworkVersion: '2'
 
