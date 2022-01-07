@@ -2,6 +2,8 @@
 
 Open source project intending to serve as a starting point for dApp development on the Algorand blockchain. In the search of publicly accessible, documented, and auditable oracles in Algorand ecosystem there is a lack of readily available sources. To this end we decided to create an Oracle to provide price information for use in Smart Contracts, open and available for all.
 
+#### Note, this project is the smart contract update logic, not the smart contract itself. For the smart contract itself, [reference this project](https://github.com/defimono/smart_contracts).
+
 ### What is an Oracle?
 
 Reference if you will, this excellent explanation given by [binance.com](https://academy.binance.com/en/articles/blockchain-oracles-explained)
