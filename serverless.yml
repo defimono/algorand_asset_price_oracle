@@ -1,6 +1,4 @@
 service: algo-price-oracle
-#app: your-app-name
-#org: your-org-name
 
 frameworkVersion: '2'
 
@@ -12,17 +10,10 @@ provider:
   region: eu-west-1
   environment:
     ALGO_CHAIN: test
+    ORACLE_APP_ID: ${ssm:/darksky-api-key~true}
 
 functions:
   main:
     handler: handler.main
-#    events:
-#      - cloudwatchEvent:
-#          event:
-#            source:
-#              - "aws.ec2"
-#            detail-type:
-#              - "EC2 Instance State-change Notification"
-#            detail:
-#              state:
-#                - pending
+    events:
+      - schedule: rate(5 minutes)
