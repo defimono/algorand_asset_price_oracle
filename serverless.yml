@@ -10,16 +10,16 @@ custom:
       development: "test"
     ORACLE_APP_ID:
       production: "main"
-      development: "1234556"
+      development: "57064474"
     ADMIN_WALLET_ADDRESS:
-      production: "main"
+      production: ""
       development: "test"
     ADMIN_PRIVATE_KEY:
-      production: "main"
-      development: "1234556"
+      production: ""
+      development: ${ssm:/path/to/service/id}
     ALGOD_ADDRESS:
-      production: "main"
-      development: "1234556"
+      production: "https://algoexplorerapi.io"
+      development: "https://testnet.algoexplorerapi.io"
 
 provider:
   name: aws
