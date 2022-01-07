@@ -10,7 +10,7 @@ custom:
       development: "test"
     ORACLE_APP_ID:
       production: "main"
-      development: "57064474"
+      development: "57082823"
     ADMIN_WALLET_ADDRESS:
       production: ""
       development: "test"
