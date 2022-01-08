@@ -7,6 +7,7 @@ on:
 
 jobs:
   build-deploy:
+    name: AWS SAM Build & Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,3 +25,11 @@ jobs:
       - run: sam build --use-container
 
       - run: sam deploy --config-env development --no-confirm-changeset
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: "Algorand Price Oracle Deployment"
+          SLACK_USERNAME: "Github"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FEED_DEPLOYMENTS }}
+          SLACK_COLOR: ${{ status-check.status }}
