@@ -1,5 +1,7 @@
 # Algorand USD Price Oracle
 
+[![Pull Request](https://github.com/defimono/algo_price_oracle/actions/workflows/pull_request.yaml/badge.svg)](https://github.com/defimono/algo_price_oracle/actions/workflows/pull_request.yaml)
+
 Open source project intending to serve as a starting point for dApp development on the Algorand blockchain. In the search of publicly accessible, documented, and auditable oracles in Algorand ecosystem there is a lack of readily available sources. To this end we decided to create an Oracle to provide price information for use in Smart Contracts, open and available for all.
 
 #### Note, this project is the smart contract update logic, not the smart contract itself. For the smart contract itself, [reference this project](https://github.com/defimono/smart_contracts).
