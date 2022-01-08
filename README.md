@@ -14,6 +14,16 @@ Main Net TBD
 
 #### Note, this project is the smart contract update logic, not the smart contract itself. For the smart contract itself, [reference this project](https://github.com/defimono/smart_contracts).
 
+## Usage Instructions for your own Smart Contracts
+
+Testnet Application ID: `57082823`
+
+To use and query the state of the application, you can reference it within your own contracts, teal, and pyteal automation by referencing [this documentation on PyTeal.](https://pyteal.readthedocs.io/en/stable/api.html#pyteal.App.globalGetEx) What you essentially do, is execute a localGetEx function and specify the application ID of the network you want to work with, pulling the data when you need.
+
+It is as simple as that, this tool is currently free for all, open source, and open for collaboration. When it comes times to release a version onto the main net, a comprehensive security audit will be petitioned and required.
+
+## F.A.Q.
+
 ### What is an Oracle?
 
 Reference if you will, this excellent explanation given by [binance.com](https://academy.binance.com/en/articles/blockchain-oracles-explained)
