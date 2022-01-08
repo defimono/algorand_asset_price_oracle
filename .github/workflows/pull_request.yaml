@@ -1,0 +1,21 @@
+name: Main workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run:
+    name: Run
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v2
+  
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
