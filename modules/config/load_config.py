@@ -17,7 +17,7 @@ def load_config():
         "admin_private_key": secret.get("ADMIN_PRIVATE_KEY"),
         "admin_mnemonic": secret.get("ADMIN_WALLET_ADDRESS"),
         "algod_address": os.environ['ALGOD_ADDRESS'],
-        "algod_token": os.environ['ALGOD_KEY'],
+        "algod_token": secret.get('ALGOD_KEY'),
         "algod_chain": os.environ['ALGOD_CHAIN'],
     }
 
