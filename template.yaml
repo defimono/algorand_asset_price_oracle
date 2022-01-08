@@ -49,4 +49,4 @@ Resources:
         UpdateScheduledEvent:
           Type: Schedule
           Properties:
-            Schedule: rate(5 minute)
+            Schedule: rate(5 minutes)

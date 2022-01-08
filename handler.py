@@ -85,21 +85,25 @@ def lambda_handler(event, context):
         # get new price
         real_price = get_updated_price()
 
-        # Real price is to fixed point to get round the issues with float in teal
+        # Real price is to fixed point to get round the issues with float in
+        # teal
         price_fixed_point = int(real_price * 10 ** 2)
 
-        logger.info("Setting 2 digit fixed point price to: {} ".format(price_fixed_point))
+        logger.info(
+            "Setting 2 digit fixed point price to: {} ".format(price_fixed_point))
 
         # call noop with new price and sign with service account
         # 2 meas we want two digits in the fixed point precision of the price
         app_args = ["update_price", price_fixed_point, 2]
 
-        # Call the update operation in the published stateful algorand smart contract
+        # Call the update operation in the published stateful algorand smart
+        # contract
         call_noop(algod_client, oracle_app_id, admin_private_key, app_args)
 
         logger.info("Application update called successfully")
 
-        # If called via API Gateway, return a formatted response body as needed.
+        # If called via API Gateway, return a formatted response body as
+        # needed.
         response = {
             "statusCode": 200,
             "body": json.dumps(price_fixed_point)
