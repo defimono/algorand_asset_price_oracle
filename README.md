@@ -4,6 +4,14 @@
 
 Open source project intending to serve as a starting point for dApp development on the Algorand blockchain. In the search of publicly accessible, documented, and auditable oracles in Algorand ecosystem there is a lack of readily available sources. To this end we decided to create an Oracle to provide price information for use in Smart Contracts, open and available for all.
 
+### AlgoExplorer Transactions
+
+For information on the current transactions, run frequency, smart contral TEAL, etc. you can follow the link below to view state in the wallet address, as well as oracle application.
+
+[Test Net Smart Contract Application](https://testnet.algoexplorer.io/address/CMB2FDHUQ74DJRUMEZQEVQ3UDOFBF5VZ3TIPPTHRLTZ7DMZEOXZI4PJM6Y)
+
+Main Net TBD
+
 #### Note, this project is the smart contract update logic, not the smart contract itself. For the smart contract itself, [reference this project](https://github.com/defimono/smart_contracts).
 
 ### What is an Oracle?
