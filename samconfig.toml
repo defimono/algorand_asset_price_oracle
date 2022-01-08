@@ -1,0 +1,12 @@
+version = 0.1
+[development]
+[development.deploy]
+[development.deploy.parameters]
+stack_name = "algo-price-oracle"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-18z1um2xwla8r"
+s3_prefix = "algo-price-oracle"
+region = "eu-west-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Environment=\"development\""
+image_repositories = []

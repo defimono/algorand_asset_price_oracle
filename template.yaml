@@ -1,0 +1,47 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: algo-price-oracle
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  Environment:
+    Type: String
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  LambdaHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: algo-price-oracle
+      Handler: handler.lambda_handler
+      Runtime: python3.9
+      CodeUri: .
+      MemorySize: 256
+      Tracing: Active
+      Policies:
+        - CloudWatchLogsFullAccess
+        - AWSLambdaVPCAccessExecutionRole
+        - AWSXRayDaemonWriteAccess
+        - Statement:
+            - Sid: SSMDescribeParametersPolicy
+              Effect: Allow
+              Action:
+                - ssm:DescribeParameters
+              Resource: '*'
+            - Sid: SSMGetParameterPolicy
+              Effect: Allow
+              Action:
+                - ssm:GetParameters
+                - ssm:GetParameter
+              Resource: '*'
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:algorand_account_credentials-00SvnV"
+      Environment:
+        Variables:
+          ALGOD_ADDRESS: "https://testnet-algorand.api.purestake.io/ps2"
+          ALGOD_CHAIN: "test"
+          AWS_SECRET_NAME: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:algorand_account_credentials-00SvnV"
+          ORACLE_APP_ID: "57082823"

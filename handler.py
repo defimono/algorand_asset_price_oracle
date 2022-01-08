@@ -33,10 +33,10 @@ def get_updated_price():
     return parsed_price
 
 
-def call_noop(client, app_id, private_key, app_args):
+def call_noop(algod_client, app_id, private_key, app_args):
     """
     Call the update function in the deployed application with the new application TEAL
-    :param client: preconfigured algod client for desired chain (main, test, or beta)
+    :param algod_client: preconfigured algod client for desired chain (main, test, or beta)
     :param app_args: app args to pass to teal function inside smart contract on chain
     :param app_id: application id to update
     :param private_key: private key to authenticate and approve ourselves following the teal logic
@@ -44,11 +44,17 @@ def call_noop(client, app_id, private_key, app_args):
     """
     sender = account.address_from_private_key(private_key)
 
+    logger.debug("Sender wallet: {}".format(sender))
+
     # get node suggested parameters
-    params = client.suggested_params()
+    params = algod_client.suggested_params()
+
+    logger.debug("params: {}".format(params))
 
     # create unsigned transaction
     txn = transaction.ApplicationNoOpTxn(sender, params, app_id, app_args)
+
+    logger.debug("txn: {}".format(txn))
 
     # sign transaction
     signed_txn = txn.sign(private_key)
@@ -56,13 +62,13 @@ def call_noop(client, app_id, private_key, app_args):
     tx_id = signed_txn.transaction.get_txid()
 
     # send transaction
-    client.send_transactions([signed_txn])
+    algod_client.send_transactions([signed_txn])
 
     # await confirmation
-    wait_for_confirmation(client, tx_id, 10)
+    wait_for_confirmation(algod_client, tx_id, 10)
 
 
-def main():
+def lambda_handler(event, context):
     try:
         app_config = load_config()
 
@@ -102,6 +108,8 @@ def main():
         return response
 
     except Exception as error:
+        logger.error("{}".format(error))
+
         response = {
             "statusCode": 500,
             "body": json.dumps(error)
@@ -114,4 +122,4 @@ if __name__ == "__main__":
     """
     Local development helper.
     """
-    logger.info(main())
+    logger.info(lambda_handler(None, None))

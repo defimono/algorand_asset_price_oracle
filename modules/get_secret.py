@@ -6,11 +6,12 @@ from botocore.exceptions import ClientError
 def get_secret(secret_name, region_name):
     """
     AWS provided code snippet to securely pull credentials in lambda
-    :return:
+    :return: secret
     """
 
     # Create a Secrets Manager client
     session = boto3.session.Session()
+
     client = session.client(
         service_name='secretsmanager',
         region_name=region_name
