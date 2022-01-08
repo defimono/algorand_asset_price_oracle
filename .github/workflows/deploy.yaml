@@ -28,8 +28,8 @@ jobs:
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
+        if: ${{ always() }}
         env:
           SLACK_TITLE: "Algorand Price Oracle Deployment"
           SLACK_USERNAME: "Github"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FEED_DEPLOYMENTS }}
-          SLACK_COLOR: ${{ status-check.status }}
