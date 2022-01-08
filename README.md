@@ -8,7 +8,6 @@ Open source project intending to serve as a starting point for dApp development 
 
 Reference if you will, this excellent explanation given by [binance.com](https://academy.binance.com/en/articles/blockchain-oracles-explained)
 
-
 Blockchain oracles are third-party services that provide smart contracts with external information. They serve as bridges between blockchains and the outside world.
 
 > Blockchains and smart contracts cannot access off-chain data (data that is outside of the network). However, for many contractual agreements, it is vital to have relevant information from the outside world to execute the agreement.
