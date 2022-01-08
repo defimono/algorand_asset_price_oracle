@@ -27,5 +27,14 @@ jobs:
         args: --recursive --in-place --aggressive --aggressive .
 
     - name: Fail if autopep8 made changes
+      id: lint_check
       if: steps.autopep8.outputs.exit-code == 2
       run: exit 1
+
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      if: ${{ always() }}
+      env:
+        SLACK_TITLE: "Algorand Price Oracle Pull Request"
+        SLACK_USERNAME: "Github"
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FEED_DEPLOYMENTS }}
