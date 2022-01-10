@@ -16,7 +16,7 @@ Main Net TBD
 
 ## Usage Instructions for your own Smart Contracts
 
-Testnet Application ID: `57082823`
+Testnet Application ID: `57235348`
 
 To use and query the state of the application, you can reference it within your own contracts, teal, and pyteal automation by referencing [this documentation on PyTeal.](https://pyteal.readthedocs.io/en/stable/api.html#pyteal.App.globalGetEx) What you essentially do, is execute a localGetEx function and specify the application ID of the network you want to work with, pulling the data when you need.
 
