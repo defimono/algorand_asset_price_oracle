@@ -12,8 +12,6 @@ For information on the current transactions, run frequency, smart contral TEAL, 
 
 Main Net TBD
 
-#### Note, this project is the smart contract update logic, not the smart contract itself. For the smart contract itself, [reference this project](https://github.com/defimono/smart_contracts).
-
 ## Usage Instructions for your own Smart Contracts
 
 Testnet Application ID: `57235348`
