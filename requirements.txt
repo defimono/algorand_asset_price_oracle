@@ -3,3 +3,4 @@ pyteal
 python-dotenv~=0.19.2
 requests
 boto3
+certifi>=2022.12.7 # not directly required, pinned by Snyk to avoid a vulnerability
